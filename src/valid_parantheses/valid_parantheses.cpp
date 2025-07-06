@@ -1,4 +1,3 @@
-#include <iostream>
 #include <map>
 #include <stack>
 #include <string>
@@ -7,28 +6,41 @@ using std::map;
 using std::string;
 
 class Solution {
+private:
+  map<char, char> matches = {{')', '('}, {']', '['}, {'}', '{'}};
+
+  auto getMatch(char val) {
+    auto it = matches.find(val);
+    return it;
+  }
 
 public:
   bool isValid(string s) {
-    if (s.size() == 1)
+    if (s.size() == 1) {
       return false;
-    map<char, char> matches = {{'(', ')'}, {'[', ']'}, {'{', '}'}};
+    }
 
     std::stack<char> stck;
+    if (matches.find(s[0]) != matches.end()) {
+      return false;
+    }
 
     for (int i = 0; i < s.length(); ++i) {
       char val = s[i];
-      auto it = matches.find(val);
-      if (it != matches.end()) {
-        stck.push(val);
-      } else if (stck.size() > 0) {
-        auto mit = matches.find(stck.top());
-        if (mit != matches.end() && mit->second == val) {
-          stck.pop();
+      auto match = getMatch(val);
+      if (match != matches.end()) {
+        if (stck.size() < 1) {
+          return false;
         }
+        if (stck.top() == match->second) {
+          stck.pop();
+        } else {
+          return false;
+        }
+      } else {
+        stck.push(val);
       }
     }
-    std::cout << stck.size() << " Size for items \n";
     return stck.size() < 1;
   }
 };

@@ -37,7 +37,21 @@ int main() {
   assert(result3Exp == result3);
   printf("3: Done\n");
 
-  // TODO: handle case ")()[]"
+  string input4 = ")(){}";
+  bool result4Exp = false;
+  bool result4 = s.isValid(input4);
+
+  printf("Running test case 4... %b \n", result4);
+  assert(result4Exp == result4);
+  printf("4: Done\n");
+
+  string input5 = "(])";
+  bool result5exp = false;
+  bool result5 = s.isValid(input5);
+
+  printf("Running test case 5... %b \n", result5);
+  assert(result5 == result5exp);
+  printf("5: Done \n");
 
   return 0;
 }
