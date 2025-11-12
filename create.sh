@@ -28,6 +28,6 @@ cat << INPUT >> $FILEPATH
 class Solution {
 public:
     // Add your methods here
-}
+};
 
 INPUT
